@@ -80,7 +80,7 @@ export function CartSheet() {
                         {item.candle.name}
                       </h4>
                       <p className="text-sm text-muted-foreground mb-2">
-                        {formatCurrency(item.candle.price)}
+                        {item.candle.price ? formatCurrency(item.candle.price) : "Sob consulta"}
                       </p>
                       <div className="flex items-center gap-3">
                         <div className="flex items-center border border-border/60 rounded-full px-2 py-1">
