@@ -11,7 +11,7 @@ import { formatCurrency } from "./utils";
 
 export function generateWhatsAppUrl(candle: Candle): string {
   const message = `Olá! Tenho interesse na vela *${candle.name}* (${formatCurrency(candle.price ?? 0)}). Poderia me passar mais informações?`;
-  return createWhatsAppUrl(siteConfig.phone, message);
+  return createWhatsAppUrl(siteConfig.whatsappNumber, message);
 }
 
 export function generateWhatsAppCartUrl(items: CartItem[], total: number): string {
@@ -24,5 +24,5 @@ export function generateWhatsAppCartUrl(items: CartItem[], total: number): strin
   message += `\n*Total estimado:* ${formatCurrency(total)}\n\n`;
   message += `Como podemos prosseguir com o pagamento e entrega?`;
   
-  return createWhatsAppUrl(siteConfig.phone, message);
+  return createWhatsAppUrl(siteConfig.whatsappNumber, message);
 }
