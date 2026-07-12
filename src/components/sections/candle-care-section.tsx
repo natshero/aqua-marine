@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Flame, Wind, Clock, AlertTriangle } from "lucide-react";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
 const careInstructions = [
   {
@@ -37,24 +38,23 @@ export function CandleCareSection() {
           {careInstructions.map((instruction, index) => {
             const Icon = instruction.icon;
             return (
-              <div 
-                key={index} 
-                className="flex items-start gap-4 p-6 rounded-2xl bg-background border border-border/40 hover:shadow-sm transition-shadow"
-              >
-                <div className="flex-shrink-0 mt-1">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground">
-                    <Icon className="w-5 h-5" />
+              <ScrollReveal key={index} delay={index * 100}>
+                <div className="flex items-start gap-4 p-6 rounded-2xl bg-background border border-border/40 hover:shadow-sm transition-shadow h-full">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
+                      {instruction.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {instruction.description}
+                    </p>
                   </div>
                 </div>
-                <div>
-                  <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
-                    {instruction.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {instruction.description}
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
             );
           })}
         </div>

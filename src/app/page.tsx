@@ -1,5 +1,4 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+
 import { HeroSection } from "@/components/sections/hero-section";
 import { FeaturedProductsSection } from "@/components/sections/featured-products-section";
 import { CategoriesSection } from "@/components/sections/categories-section";
@@ -13,21 +12,17 @@ import { ContactSection } from "@/components/sections/contact-section";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main className="flex-1 flex flex-col">
-        <HeroSection />
-        <FeaturedProductsSection />
-        <CategoriesSection />
-        <BenefitsSection />
-        <GiftKitsSection />
-        <AboutSection />
-        <CandleCareSection />
-        <TestimonialsSection />
-        <InstagramSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </>
+    <main className="flex-1 flex flex-col">
+      <HeroSection />
+      <FeaturedProductsSection />
+      <CategoriesSection />
+      <BenefitsSection />
+      <GiftKitsSection />
+      <AboutSection />
+      <CandleCareSection />
+      <TestimonialsSection />
+      <InstagramSection />
+      <ContactSection />
+    </main>
   );
 }

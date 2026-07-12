@@ -1,17 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import { Candle } from "@/types/candle";
 import { formatCurrency } from "@/lib/utils";
 import { ProductBadge } from "./product-badge";
+import { useCart } from "@/contexts/cart-context";
 import { WhatsAppButton } from "@/components/shared/whatsapp-button";
+import { Button } from "@/components/ui/button";
+import { ShoppingBag } from "lucide-react";
 
 interface CandleCardProps {
   candle: Candle;
 }
 
 export function CandleCard({ candle }: CandleCardProps) {
+  const { addItem } = useCart();
+
   return (
     <div className="group flex flex-col h-full bg-card rounded-2xl border border-border/40 overflow-hidden hover:shadow-md transition-all duration-300">
-      <div className="relative aspect-square overflow-hidden bg-muted/20">
+      <div className="relative aspect-[4/5] overflow-hidden bg-muted/20">
         {candle.new && <ProductBadge label="Novo" variant="new" />}
         {candle.featured && !candle.new && <ProductBadge label="Destaque" variant="featured" />}
         {candle.customizable && !candle.new && !candle.featured && (
@@ -28,14 +35,18 @@ export function CandleCard({ candle }: CandleCardProps) {
         
         {/* Hover Overlay & Button */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
-          <WhatsAppButton 
-            message={`Olá! Quero comprar a vela ${candle.name}.`}
-            size="default"
-            variant="default"
-            className="rounded-full px-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out shadow-lg"
-          >
-            Comprar Agora
-          </WhatsAppButton>
+          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+            <Button 
+              onClick={(e) => {
+                e.preventDefault();
+                addItem(candle);
+              }}
+              className="w-full rounded-full bg-background/90 text-foreground hover:bg-background backdrop-blur-sm border border-border/50 shadow-lg"
+            >
+              <ShoppingBag className="w-4 h-4 mr-2" />
+              Adicionar à Sacola
+            </Button>
+          </div>
         </div>
         
         {!candle.available && (
