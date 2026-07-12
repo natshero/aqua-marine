@@ -10,7 +10,7 @@ import { siteConfig } from "@/data/site-config";
 import { formatCurrency } from "./utils";
 
 export function generateWhatsAppUrl(candle: Candle): string {
-  const message = `Olá! Tenho interesse na vela *${candle.name}* (${formatCurrency(candle.price)}). Poderia me passar mais informações?`;
+  const message = `Olá! Tenho interesse na vela *${candle.name}* (${formatCurrency(candle.price ?? 0)}). Poderia me passar mais informações?`;
   return createWhatsAppUrl(siteConfig.phone, message);
 }
 
@@ -18,7 +18,7 @@ export function generateWhatsAppCartUrl(items: CartItem[], total: number): strin
   let message = `Olá! Gostaria de finalizar um pedido da *${siteConfig.name}*:\n\n`;
   
   items.forEach(item => {
-    message += `▪ ${item.quantity}x ${item.candle.name} - ${formatCurrency(item.candle.price * item.quantity)}\n`;
+    message += `▪ ${item.quantity}x ${item.candle.name} - ${formatCurrency((item.candle.price ?? 0) * item.quantity)}\n`;
   });
   
   message += `\n*Total estimado:* ${formatCurrency(total)}\n\n`;
