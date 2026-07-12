@@ -33,21 +33,7 @@ export function CandleCard({ candle }: CandleCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         
-        {/* Hover Overlay & Button */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
-          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-            <Button 
-              onClick={(e) => {
-                e.preventDefault();
-                addItem(candle);
-              }}
-              className="w-full rounded-full bg-background/90 text-foreground hover:bg-background backdrop-blur-sm border border-border/50 shadow-lg"
-            >
-              <ShoppingBag className="w-4 h-4 mr-2" />
-              Adicionar à Sacola
-            </Button>
-          </div>
-        </div>
+
         
         {!candle.available && (
           <div className="absolute inset-0 bg-background/60 flex items-center justify-center backdrop-blur-[2px]">
@@ -72,25 +58,39 @@ export function CandleCard({ candle }: CandleCardProps) {
           {candle.shortDescription}
         </p>
 
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
-          <div className="flex flex-col">
-            {candle.size && (
-              <span className="text-xs text-muted-foreground">{candle.size}</span>
-            )}
-            <span className="font-medium text-foreground">
-              {candle.price ? formatCurrency(candle.price) : "Sob consulta"}
-            </span>
+        <div className="flex flex-col mt-auto pt-4 border-t border-border/50 gap-4">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              {candle.size && (
+                <span className="text-xs text-muted-foreground">{candle.size}</span>
+              )}
+              <span className="font-medium text-foreground">
+                {candle.price ? formatCurrency(candle.price) : "Sob consulta"}
+              </span>
+            </div>
+            
+            <WhatsAppButton 
+              message={`Olá! Gostaria de saber mais sobre a vela ${candle.name}.`}
+              size="sm"
+              variant="ghost"
+              showIcon={false}
+              className="rounded-full px-4 text-xs h-8 text-muted-foreground hover:text-foreground"
+            >
+              Dúvidas?
+            </WhatsAppButton>
           </div>
-          
-          <WhatsAppButton 
-            message={`Olá! Gostaria de saber mais sobre a vela ${candle.name}.`}
-            size="sm"
-            variant={candle.available ? "default" : "outline"}
-            showIcon={false}
-            className="rounded-full px-4"
+
+          <Button 
+            onClick={(e) => {
+              e.preventDefault();
+              addItem(candle);
+            }}
+            disabled={!candle.available}
+            className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-11"
           >
-            {candle.available ? "Pedir" : "Avisar"}
-          </WhatsAppButton>
+            <ShoppingBag className="w-4 h-4 mr-2" />
+            {candle.available ? "Adicionar à Sacola" : "Esgotado"}
+          </Button>
         </div>
       </div>
     </div>
